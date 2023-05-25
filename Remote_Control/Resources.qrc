@@ -2,5 +2,13 @@
     <qresource prefix="/Img">
         <file>Img/M10.jpg</file>
         <file>Img/screenshot.bmp</file>
+        <file>Img/cmsnBac.jpg</file>
+    </qresource>
+    <qresource prefix="/Icon">
+        <file>Icon/add.png</file>
+        <file>Icon/remove.png</file>
+        <file>Icon/rename.png</file>
+        <file>Icon/copy.png</file>
+        <file>Icon/paste.png</file>
     </qresource>
 </RCC>

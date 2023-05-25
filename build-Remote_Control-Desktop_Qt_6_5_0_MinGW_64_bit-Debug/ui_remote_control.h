@@ -10,19 +10,21 @@
 #define UI_REMOTE_CONTROL_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QAction>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QDateEdit>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
-#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QTextEdit>
+#include <QtWidgets/QTreeView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -31,6 +33,9 @@ QT_BEGIN_NAMESPACE
 class Ui_Remote_Control
 {
 public:
+    QAction *actionAdd_File;
+    QAction *actionDelete_File;
+    QAction *actionRename;
     QWidget *centralwidget;
     QStackedWidget *wd_app;
     QWidget *wd_login;
@@ -57,9 +62,15 @@ public:
     QPushButton *btn_home_process;
     QStackedWidget *wd_home_work;
     QWidget *wd_home_menu;
-    QSpinBox *spinBox;
+    QLabel *label_2;
+    QLabel *label_3;
     QWidget *wd_home_folder;
-    QDateEdit *dateEdit;
+    QTreeView *tv_home_folder;
+    QFrame *fr_home_folder_search;
+    QWidget *horizontalLayoutWidget;
+    QHBoxLayout *hor_home_folder_search;
+    QLineEdit *lin_home_folder_path;
+    QPushButton *btn_home_folder_submit;
     QWidget *wd_home_app;
     QLabel *label;
     QWidget *wd_home_process;
@@ -68,7 +79,8 @@ public:
     QPushButton *btn_home_screen_link;
     QLabel *img_home_screen;
     QWidget *wd_home_key;
-    QTextEdit *textEdit;
+    QPlainTextEdit *plt_home_key;
+    QLabel *lb_home_key_press;
     QLabel *lb_home_head;
     QStatusBar *statusbar;
 
@@ -77,6 +89,21 @@ public:
         if (Remote_Control->objectName().isEmpty())
             Remote_Control->setObjectName("Remote_Control");
         Remote_Control->resize(800, 600);
+        actionAdd_File = new QAction(Remote_Control);
+        actionAdd_File->setObjectName("actionAdd_File");
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/Icon/Icon/add.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionAdd_File->setIcon(icon);
+        actionDelete_File = new QAction(Remote_Control);
+        actionDelete_File->setObjectName("actionDelete_File");
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/Icon/Icon/remove.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionDelete_File->setIcon(icon1);
+        actionRename = new QAction(Remote_Control);
+        actionRename->setObjectName("actionRename");
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8(":/Icon/Icon/rename.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionRename->setIcon(icon2);
         centralwidget = new QWidget(Remote_Control);
         centralwidget->setObjectName("centralwidget");
         QFont font;
@@ -182,7 +209,7 @@ public:
         wd_home->setObjectName("wd_home");
         verticalLayoutWidget = new QWidget(wd_home);
         verticalLayoutWidget->setObjectName("verticalLayoutWidget");
-        verticalLayoutWidget->setGeometry(QRect(390, 90, 91, 411));
+        verticalLayoutWidget->setGeometry(QRect(400, 90, 91, 411));
         QFont font4;
         font4.setFamilies({QString::fromUtf8("Arial")});
         verticalLayoutWidget->setFont(font4);
@@ -221,20 +248,62 @@ public:
 
         wd_home_work = new QStackedWidget(wd_home);
         wd_home_work->setObjectName("wd_home_work");
-        wd_home_work->setGeometry(QRect(30, 90, 331, 411));
-        wd_home_work->setStyleSheet(QString::fromUtf8("\n"
-"background-color: rgb(100, 100, 100);"));
+        wd_home_work->setGeometry(QRect(20, 90, 361, 411));
+        wd_home_work->setStyleSheet(QString::fromUtf8("background-color: rgb(203, 226, 255);"));
         wd_home_menu = new QWidget();
         wd_home_menu->setObjectName("wd_home_menu");
-        spinBox = new QSpinBox(wd_home_menu);
-        spinBox->setObjectName("spinBox");
-        spinBox->setGeometry(QRect(130, 100, 42, 25));
+        label_2 = new QLabel(wd_home_menu);
+        label_2->setObjectName("label_2");
+        label_2->setGeometry(QRect(-2, 25, 361, 211));
+        label_2->setPixmap(QPixmap(QString::fromUtf8(":/Img/Img/cmsnBac.jpg")));
+        label_2->setScaledContents(true);
+        label_3 = new QLabel(wd_home_menu);
+        label_3->setObjectName("label_3");
+        label_3->setGeometry(QRect(10, 250, 341, 91));
+        QFont font5;
+        font5.setFamilies({QString::fromUtf8("Arial")});
+        font5.setPointSize(18);
+        label_3->setFont(font5);
+        label_3->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 0);"));
+        label_3->setAlignment(Qt::AlignCenter);
         wd_home_work->addWidget(wd_home_menu);
         wd_home_folder = new QWidget();
         wd_home_folder->setObjectName("wd_home_folder");
-        dateEdit = new QDateEdit(wd_home_folder);
-        dateEdit->setObjectName("dateEdit");
-        dateEdit->setGeometry(QRect(30, 180, 110, 25));
+        tv_home_folder = new QTreeView(wd_home_folder);
+        tv_home_folder->setObjectName("tv_home_folder");
+        tv_home_folder->setGeometry(QRect(0, 0, 361, 411));
+        tv_home_folder->setStyleSheet(QString::fromUtf8("background-color: rgb(203, 226, 255);"));
+        tv_home_folder->setFrameShape(QFrame::NoFrame);
+        fr_home_folder_search = new QFrame(wd_home_folder);
+        fr_home_folder_search->setObjectName("fr_home_folder_search");
+        fr_home_folder_search->setGeometry(QRect(10, 350, 341, 51));
+        fr_home_folder_search->setStyleSheet(QString::fromUtf8("background-color: rgb(203, 226, 255);"));
+        fr_home_folder_search->setFrameShape(QFrame::StyledPanel);
+        fr_home_folder_search->setFrameShadow(QFrame::Raised);
+        fr_home_folder_search->setLineWidth(0);
+        horizontalLayoutWidget = new QWidget(fr_home_folder_search);
+        horizontalLayoutWidget->setObjectName("horizontalLayoutWidget");
+        horizontalLayoutWidget->setGeometry(QRect(0, 0, 341, 51));
+        hor_home_folder_search = new QHBoxLayout(horizontalLayoutWidget);
+        hor_home_folder_search->setObjectName("hor_home_folder_search");
+        hor_home_folder_search->setSizeConstraint(QLayout::SetNoConstraint);
+        hor_home_folder_search->setContentsMargins(0, 0, 0, 0);
+        lin_home_folder_path = new QLineEdit(horizontalLayoutWidget);
+        lin_home_folder_path->setObjectName("lin_home_folder_path");
+        lin_home_folder_path->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+
+        hor_home_folder_search->addWidget(lin_home_folder_path);
+
+        btn_home_folder_submit = new QPushButton(horizontalLayoutWidget);
+        btn_home_folder_submit->setObjectName("btn_home_folder_submit");
+        QFont font6;
+        font6.setBold(true);
+        btn_home_folder_submit->setFont(font6);
+        btn_home_folder_submit->setStyleSheet(QString::fromUtf8("background-color: rgb(203, 255, 169);\n"
+"color: rgb(0, 0, 0);"));
+
+        hor_home_folder_search->addWidget(btn_home_folder_submit);
+
         wd_home_work->addWidget(wd_home_folder);
         wd_home_app = new QWidget();
         wd_home_app->setObjectName("wd_home_app");
@@ -254,24 +323,32 @@ public:
         btn_home_screen_link = new QPushButton(wd_home_screen);
         btn_home_screen_link->setObjectName("btn_home_screen_link");
         btn_home_screen_link->setGeometry(QRect(100, 350, 131, 31));
-        QFont font5;
-        font5.setFamilies({QString::fromUtf8("Arial")});
-        font5.setPointSize(13);
-        font5.setBold(false);
-        btn_home_screen_link->setFont(font5);
+        QFont font7;
+        font7.setFamilies({QString::fromUtf8("Arial")});
+        font7.setPointSize(13);
+        font7.setBold(false);
+        btn_home_screen_link->setFont(font7);
         btn_home_screen_link->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 127);\n"
 "color: rgb(0, 0, 0);"));
         img_home_screen = new QLabel(wd_home_screen);
         img_home_screen->setObjectName("img_home_screen");
-        img_home_screen->setGeometry(QRect(0, 30, 331, 201));
+        img_home_screen->setGeometry(QRect(0, 30, 361, 221));
         img_home_screen->setPixmap(QPixmap(QString::fromUtf8(":/Img/Img/M10.jpg")));
         img_home_screen->setScaledContents(true);
         wd_home_work->addWidget(wd_home_screen);
         wd_home_key = new QWidget();
         wd_home_key->setObjectName("wd_home_key");
-        textEdit = new QTextEdit(wd_home_key);
-        textEdit->setObjectName("textEdit");
-        textEdit->setGeometry(QRect(110, 90, 104, 70));
+        plt_home_key = new QPlainTextEdit(wd_home_key);
+        plt_home_key->setObjectName("plt_home_key");
+        plt_home_key->setGeometry(QRect(10, 10, 341, 251));
+        lb_home_key_press = new QLabel(wd_home_key);
+        lb_home_key_press->setObjectName("lb_home_key_press");
+        lb_home_key_press->setGeometry(QRect(130, 290, 101, 51));
+        lb_home_key_press->setFont(font2);
+        lb_home_key_press->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 0);"));
+        lb_home_key_press->setFrameShape(QFrame::StyledPanel);
+        lb_home_key_press->setFrameShadow(QFrame::Plain);
+        lb_home_key_press->setAlignment(Qt::AlignCenter);
         wd_home_work->addWidget(wd_home_key);
         lb_home_head = new QLabel(wd_home);
         lb_home_head->setObjectName("lb_home_head");
@@ -294,8 +371,8 @@ public:
 
         retranslateUi(Remote_Control);
 
-        wd_app->setCurrentIndex(0);
-        wd_home_work->setCurrentIndex(0);
+        wd_app->setCurrentIndex(1);
+        wd_home_work->setCurrentIndex(5);
 
 
         QMetaObject::connectSlotsByName(Remote_Control);
@@ -304,6 +381,9 @@ public:
     void retranslateUi(QMainWindow *Remote_Control)
     {
         Remote_Control->setWindowTitle(QCoreApplication::translate("Remote_Control", "Remote_Control", nullptr));
+        actionAdd_File->setText(QCoreApplication::translate("Remote_Control", "Add File", nullptr));
+        actionDelete_File->setText(QCoreApplication::translate("Remote_Control", "Delete File", nullptr));
+        actionRename->setText(QCoreApplication::translate("Remote_Control", "Rename", nullptr));
         lb_login_header->setText(QCoreApplication::translate("Remote_Control", "\304\220\304\203ng nh\341\272\255p Client", nullptr));
         img_login_logo->setText(QString());
         lb_login_port->setText(QCoreApplication::translate("Remote_Control", "Port:", nullptr));
@@ -320,18 +400,14 @@ public:
 "App", nullptr));
         btn_home_process->setText(QCoreApplication::translate("Remote_Control", "Qu\341\272\243n l\303\275\n"
 "ti\341\272\277n tr\303\254nh", nullptr));
+        label_2->setText(QString());
+        label_3->setText(QCoreApplication::translate("Remote_Control", "App hay qu\303\241 n\303\250!!! \n"
+"M\341\273\235i b\341\272\241n th\341\273\255 nha \342\235\244\357\270\217\342\235\244\357\270\217\342\235\244\357\270\217", nullptr));
+        btn_home_folder_submit->setText(QCoreApplication::translate("Remote_Control", "SUBMIT", nullptr));
         label->setText(QCoreApplication::translate("Remote_Control", "Appppppppppppppppp", nullptr));
         btn_home_screen_link->setText(QCoreApplication::translate("Remote_Control", "T\341\273\233i \304\220\306\260\341\273\235ng D\341\272\253n", nullptr));
         img_home_screen->setText(QString());
-        textEdit->setHtml(QCoreApplication::translate("Remote_Control", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"hr { height: 1px; border-width: 0; }\n"
-"li.unchecked::marker { content: \"\\2610\"; }\n"
-"li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">fuccccc</p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
+        lb_home_key_press->setText(QCoreApplication::translate("Remote_Control", "Key Press", nullptr));
         lb_home_head->setText(QCoreApplication::translate("Remote_Control", "MENU", nullptr));
     } // retranslateUi
 

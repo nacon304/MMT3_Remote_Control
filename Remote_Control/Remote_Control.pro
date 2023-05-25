@@ -9,13 +9,15 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    FolderTask.cpp \
     main.cpp \
     remote_control.cpp
 
 HEADERS += \
+    FolderTask.h \
     Globals.h \
-    remote_control.h \
-    globals.h
+    ListApp.h \
+    remote_control.h
 
 FORMS += \
     remote_control.ui
