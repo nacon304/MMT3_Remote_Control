@@ -34,7 +34,7 @@
 background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="wd_login">
      <widget class="QFrame" name="fr_login_head">
@@ -349,7 +349,7 @@ tiến trình</string>
        <string notr="true">background-color: rgb(203, 226, 255);</string>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="wd_home_menu">
        <widget class="QLabel" name="img_home_menu_logo">
@@ -494,7 +494,7 @@ background-color: rgb(255, 255, 255);</string>
          <string notr="true">background-color: rgb(203, 226, 255);</string>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tab_home_app_all">
          <attribute name="title">
