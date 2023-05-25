@@ -34,7 +34,7 @@
 background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="wd_login">
      <widget class="QFrame" name="fr_login_head">
@@ -78,9 +78,9 @@ background-color: rgb(255, 255, 255);</string>
       <widget class="QLabel" name="img_login_logo">
        <property name="geometry">
         <rect>
-         <x>90</x>
+         <x>120</x>
          <y>40</y>
-         <width>271</width>
+         <width>211</width>
          <height>171</height>
         </rect>
        </property>
@@ -91,7 +91,7 @@ background-color: rgb(255, 255, 255);</string>
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="Resources.qrc">:/Img/Img/M10.jpg</pixmap>
+        <pixmap resource="Resources.qrc">:/Img/Img/logo.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -349,7 +349,7 @@ tiến trình</string>
        <string notr="true">background-color: rgb(203, 226, 255);</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="wd_home_menu">
        <widget class="QLabel" name="img_home_menu_logo">
@@ -475,6 +475,19 @@ color: rgb(0, 0, 0);</string>
          </layout>
         </widget>
        </widget>
+       <widget class="QListView" name="lv_home_folder_all">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>361</width>
+          <height>411</height>
+         </rect>
+        </property>
+       </widget>
+       <zorder>lv_home_folder_all</zorder>
+       <zorder>tv_home_folder</zorder>
+       <zorder>fr_home_folder_search</zorder>
       </widget>
       <widget class="QWidget" name="wd_home_app">
        <property name="styleSheet">
@@ -560,7 +573,7 @@ background-color: rgb(255, 255, 255);</string>
          <string notr="true">background-color: rgb(203, 226, 255);</string>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="tab_home_process_all">
          <attribute name="title">
@@ -722,6 +735,19 @@ color: rgb(0, 0, 0);</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_home_back">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>20</y>
+        <width>31</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>🔙</string>
       </property>
      </widget>
     </widget>

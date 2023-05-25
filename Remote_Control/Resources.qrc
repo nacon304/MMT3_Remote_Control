@@ -3,6 +3,7 @@
         <file>Img/M10.jpg</file>
         <file>Img/screenshot.bmp</file>
         <file>Img/cmsnBac.jpg</file>
+        <file>Img/logo.png</file>
     </qresource>
     <qresource prefix="/Icon">
         <file>Icon/add.png</file>

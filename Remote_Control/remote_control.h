@@ -61,6 +61,8 @@ private slots:
 
     void on_lv_home_app_run_doubleClicked(const QModelIndex &index);
 
+    void on_btn_home_back_clicked();
+
 private:
     Ui::Remote_Control *ui;
 };

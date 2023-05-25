@@ -349,9 +349,13 @@ void Remote_Control::on_actionAdd_File_triggered()
             return;
         }
 
+        QString type = "File";
         FolderTask * fl;
         if(isValidFolderName(fileName))
+        {
             fl->createFolder(newFile.toLatin1().constData());
+            type = "Folder";
+        }
         else
             fl->createFile(newFile.toLatin1().constData());
 
@@ -360,6 +364,7 @@ void Remote_Control::on_actionAdd_File_triggered()
         if(model) {
             QStandardItem* itemName = new QStandardItem(fileName);
             QStandardItem* itemPath = new QStandardItem(newFile + '/');
+            QStandardItem* itemType = new QStandardItem(type);
 
             // Lấy QStandardItem cha tại previousDoubleClickedIndex
             QStandardItem* parentItem = model->itemFromIndex(previousDoubleClickedIndex);
@@ -367,6 +372,7 @@ void Remote_Control::on_actionAdd_File_triggered()
             // Đặt các giá trị vào các cột
             parentItem->setChild(parentItem->rowCount(), 0, itemName);
             parentItem->setChild(parentItem->rowCount() - 1, 1, itemPath);
+            parentItem->setChild(parentItem->rowCount() - 1, 2, itemType);
         }
 
         QMessageBox::information(this, "Thông báo", "Thêm file thành công!!!");
@@ -483,15 +489,20 @@ void Remote_Control::on_actionPaste_File_triggered()
     QString oldPath = pathSrc.removeLast();
     QString newPath = pathDes + nameSrc;
 
+    QString type = "File";
     FolderTask * fl;
     if(fl->isFolder(oldPath.toStdString()))
+    {
         fl->createFolder(newPath.toLatin1().constData());
+        type = "Folder";
+    }
     else
         fl->createFile(newPath.toLatin1().constData());
 
     if(model) {
         QStandardItem* itemName = new QStandardItem(nameSrc);
         QStandardItem* itemPath = new QStandardItem(newPath + '/');
+        QStandardItem* itemType = new QStandardItem(type);
 
         // Lấy QStandardItem cha tại previousDoubleClickedIndex
         QStandardItem* parentItem = model->itemFromIndex(previousDoubleClickedIndex);
@@ -499,6 +510,7 @@ void Remote_Control::on_actionPaste_File_triggered()
         // Đặt các giá trị vào các cột
         parentItem->setChild(parentItem->rowCount(), 0, itemName);
         parentItem->setChild(parentItem->rowCount() - 1, 1, itemPath);
+        parentItem->setChild(parentItem->rowCount() - 1, 1, itemType);
     }
 
     QMessageBox::information(this, "Thông báo", "Đã dán file thành công!!!");
@@ -546,6 +558,12 @@ void Remote_Control::on_btn_home_folder_submit_clicked()
         QStandardItem* itemPath = new QStandardItem(path + file + '/');
         rootItem->appendRow(itemName);
         rootItem->setChild(i, 1, itemPath);
+
+        QString type = "File";
+        if(fl->isFolder((path + file).toStdString()))
+            type = "Folder";
+        rootItem->setChild(i, 2, new QStandardItem(type));
+
         stItem.enqueue(rootItem->child(i));
 //        QModelIndex childIndex = rootItem->child(i)->index(); // Get the index of the current child item
 //        QModelIndex nextSiblingIndex = childIndex.sibling(childIndex.row(), childIndex.column() + 1);
@@ -572,12 +590,17 @@ void Remote_Control::on_btn_home_folder_submit_clicked()
             QStandardItem* item = new QStandardItem(file);
             rItem->appendRow(item);
             rItem->setChild(i, 1, new QStandardItem(pth + file + '/'));
+
+            QString type = "File";
+            if(fl->isFolder((pth + file).toStdString()))
+                type = "Folder";
+            rItem->setChild(i, 2, new QStandardItem(type));
 //            rootItem->appendColumn(new QStandardItem(pth + '\\' + QString::fromStdString(file)));
             stItem.enqueue(rItem->child(i));
         }
 
     }
-
+//    ui->tv_home_folder->setStyleSheet("QTreeView::item { border-color: red; }");
 //    ui->tv_home_folder->setColumnHidden(1, true);
     ui->fr_home_folder_search->hide();
     ui->btn_home_folder_submit->hide();
@@ -681,5 +704,14 @@ void Remote_Control::on_lv_home_app_run_doubleClicked(const QModelIndex &index)
         // User chose not to run the item
         qDebug() << "Not running item:" << path;
     }
+}
+
+
+void Remote_Control::on_btn_home_back_clicked()
+{
+//    closesocket(m_socket);
+//    printf("Close m_socket\n");
+//    WSACleanup();
+    ui->wd_app->setCurrentWidget(ui->wd_login);
 }
 
